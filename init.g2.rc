@@ -234,6 +234,7 @@ on post-fs-data
     write /sys/module/pm_8x60/modes/cpu2/retention/idle_enabled 0
     write /sys/module/pm_8x60/modes/cpu3/retention/idle_enabled 0
     write /sys/module/msm_thermal/core_control/enabled 0
+    write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -293,7 +294,8 @@ on charger
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     start rmt_storage
@@ -448,6 +450,10 @@ service fuse_usb /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usb /storage/u
 on property:sys.perf.profile=0
     start mpdecision
     #start thermal-engine
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor conservative
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor conservative
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor conservative
@@ -457,6 +463,10 @@ on property:sys.perf.profile=0
 on property:sys.perf.profile=1
     start mpdecision
     #start thermal-engine
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
